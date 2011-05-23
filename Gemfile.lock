@@ -1,8 +1,19 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.0.7)
+      activesupport (= 3.0.7)
+      builder (~> 2.1.2)
+      i18n (~> 0.5.0)
+    activeresource (3.0.7)
+      activemodel (= 3.0.7)
+      activesupport (= 3.0.7)
+    activesupport (3.0.7)
+    builder (2.1.2)
     crack (0.1.8)
     git (1.2.5)
+    hashie (1.0.0)
+    i18n (0.5.0)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
@@ -14,6 +25,14 @@ GEM
       crack
       typhoeus
     shoulda (2.11.3)
+    ticketmaster (0.5.6)
+      activeresource
+      activeresource (>= 2.3.2)
+      activesupport
+      activesupport (>= 2.3.2)
+      hashie (= 1.0.0)
+      hashie
+      jeweler
     typhoeus (0.2.4)
       mime-types
       mime-types
@@ -27,3 +46,4 @@ DEPENDENCIES
   rcov
   ruby-fogbugz
   shoulda
+  ticketmaster
