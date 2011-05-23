@@ -1,0 +1,29 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    crack (0.1.8)
+    git (1.2.5)
+    jeweler (1.5.2)
+      bundler (~> 1.0.0)
+      git (>= 1.2.5)
+      rake
+    mime-types (1.16)
+    rake (0.9.0)
+    rcov (0.9.9)
+    ruby-fogbugz (0.0.2)
+      crack
+      typhoeus
+    shoulda (2.11.3)
+    typhoeus (0.2.4)
+      mime-types
+      mime-types
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 1.0.0)
+  jeweler (~> 1.5.1)
+  rcov
+  ruby-fogbugz
+  shoulda
