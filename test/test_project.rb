@@ -5,6 +5,8 @@ class TestProject < Test::Unit::TestCase
   def setup
     @klass = TicketMaster::Provider::Fogbugz::Project
     @tm = TicketMaster.new(:fogbugz, :email => 'email@test.com', :password => '12345', :uri => 'http://fogbugz.testing.com')
+    project = {:id => 1}
+    ::Fogbugz::Interface.expects(:command).with(:listProjects).returns([project])
   end
   
   should "be able to load all projects" do 

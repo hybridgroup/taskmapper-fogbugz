@@ -18,10 +18,10 @@ module TicketMaster::Provider
     # parameters to access the API
     def authorize(auth = {})
       @authentication ||= TicketMaster::Authenticator.new(auth)
-      auth = @authentication
-      if auth.email.nil? || auth.password.nil? || auth.uri.nil?
+      if auth[:email].nil? || auth[:password].nil? || auth[:uri].nil?
         raise "Please provide email, password and uri"
       end
+      puts auth.inspect
       @fogbugz = ::Fogbugz::Interface.new(auth).authenticate
       TicketMaster::Provider::Fogbugz.api = @fogbugz
     end
