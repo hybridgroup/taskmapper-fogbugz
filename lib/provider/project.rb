@@ -19,6 +19,15 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find_by_attributes(attributes = {})
+        search_by_attribute(self.find_all, attributes)
+      end
+
+      def self.find_all
+        TicketMaster::Provider::Fogbugz.api.command(:listProjects).map do |project| 
+          self.new project
+        end
+      end
     end
   end
 end

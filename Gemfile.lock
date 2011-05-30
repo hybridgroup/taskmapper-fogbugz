@@ -21,7 +21,7 @@ GEM
     mime-types (1.16)
     rake (0.9.0)
     rcov (0.9.9)
-    ruby-fogbugz (0.0.2)
+    ruby-fogbugz (0.0.3)
       crack
       typhoeus
     shoulda (2.11.3)
