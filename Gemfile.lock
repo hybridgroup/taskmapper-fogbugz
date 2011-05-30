@@ -25,6 +25,7 @@ GEM
       crack
       typhoeus
     shoulda (2.11.3)
+    shoulda-context (1.0.0.beta1)
     ticketmaster (0.5.6)
       activeresource
       activeresource (>= 2.3.2)
@@ -46,4 +47,5 @@ DEPENDENCIES
   rcov
   ruby-fogbugz
   shoulda
+  shoulda-context
   ticketmaster
