@@ -63,6 +63,10 @@ module TicketMaster::Provider
         search_by_attribute(self.find_all, attributes)
       end
 
+      def self.find_by_id(id)
+        self.find_all.select { |project| project.id == id }.first
+      end
+
       def self.find_all
         projects = []
         TicketMaster::Provider::Fogbugz.api.command(:listProjects).each do |project|

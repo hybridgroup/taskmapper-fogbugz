@@ -25,11 +25,18 @@ module TicketMaster::Provider
       @fogbugz.authenticate
       TicketMaster::Provider::Fogbugz.api = @fogbugz
     end
-    
     # declare needed overloaded methods here
     
     def projects(*options)
       Project.find(options)
+    end
+
+    def project(*options)
+      unless options.first.is_a? Fixnum 
+        raise "Search for a single project only works with a project id"
+      else
+        Project.find_by_id(options.first)
+      end
     end
     
   end
