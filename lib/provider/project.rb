@@ -48,6 +48,11 @@ module TicketMaster::Provider
       end
 
       def self.find(*options)
+        if options.first.is_a? Array
+          self.find_all.select do |project|
+            options.first.any? { |id| project.id == id }
+          end
+        end
         self.find_all
       end
 
