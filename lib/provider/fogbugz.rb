@@ -28,6 +28,10 @@ module TicketMaster::Provider
     
     # declare needed overloaded methods here
     
+    def projects(*options)
+      Project.find(options)
+    end
+    
   end
 end
 

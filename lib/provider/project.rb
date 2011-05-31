@@ -25,15 +25,15 @@ module TicketMaster::Provider
       end
 
       def id
-        self[:ixProject].to_i
+        ixProject.to_i
       end
 
       def name
-        self[:sProject]
+        sProject
       end
 
       def description
-        self[:sProject]
+        sProject
       end
 
       # copy from this.copy(that) copies that into this
@@ -47,14 +47,20 @@ module TicketMaster::Provider
         end
       end
 
+      def self.find(*options)
+        self.find_all
+      end
+
       def self.find_by_attributes(attributes = {})
         search_by_attribute(self.find_all, attributes)
       end
 
       def self.find_all
-        TicketMaster::Provider::Fogbugz.api.command(:listProjects).each do |project| 
-          project[1]['project'].map { |xpro| self.new xpro }
+        projects = []
+        TicketMaster::Provider::Fogbugz.api.command(:listProjects).each do |project|
+          projects << project[1]['project'].map { |xpro| self.new xpro }
         end
+        projects.flatten
       end
     end
   end
