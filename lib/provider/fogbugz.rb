@@ -21,8 +21,8 @@ module TicketMaster::Provider
       if auth[:email].nil? || auth[:password].nil? || auth[:uri].nil?
         raise "Please provide email, password and uri"
       end
-      puts auth.inspect
-      @fogbugz = ::Fogbugz::Interface.new(auth).authenticate
+      @fogbugz = ::Fogbugz::Interface.new(auth)
+      @fogbugz.authenticate
       TicketMaster::Provider::Fogbugz.api = @fogbugz
     end
     
