@@ -28,4 +28,10 @@ class TestProject < Test::Unit::TestCase
     assert_equal "Sample Project", projects.first.name
   end
 
+  should "be able to load a single ticket based on id" do 
+    project = @tm.project(1)
+    assert_equal true, project.instance_of?(@klass)
+    assert_equal 1, project.id
+  end
+
 end
