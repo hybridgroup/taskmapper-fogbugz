@@ -9,7 +9,16 @@ class TestProject < Test::Unit::TestCase
   end
   
   should "be able to load all projects" do 
-    assert_equal true, @tm.projects.instance_of?(Array)
-    assert_equal true, @tm.projects.first.instance_of?(@klass)
+    projects = @tm.projects
+    assert_equal true, projects.instance_of?(Array)
+    assert_equal true, projects.first.instance_of?(@klass)
   end
+
+  should "be able to load a group of projects based on array of id's" do 
+    projects = @tm.projects([1,2])
+    assert_equal true, projects.instance_of?(Array)
+    assert_equal true, projects.first.instance_of?(@klass)
+    assert_equal 2, projects.first.id
+  end
+
 end
