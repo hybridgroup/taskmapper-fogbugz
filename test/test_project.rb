@@ -21,4 +21,11 @@ class TestProject < Test::Unit::TestCase
     assert_equal 2, projects.first.id
   end
 
+  should "be able to load tickets based on attributes" do 
+    projects = @tm.projects(:id => 1)
+    assert_equal true, projects.instance_of?(Array)
+    assert_equal true, projects.first.instance_of?(@klass)
+    assert_equal "Sample Project", projects.first.name
+  end
+
 end
