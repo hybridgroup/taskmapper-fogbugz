@@ -51,6 +51,14 @@ module TicketMaster::Provider
         Ticket.find(self.id, options)
       end
 
+      def ticket(*options)
+        if options.first.is_a? Fixnum
+          Ticket.find_by_id(self.id, options.first)
+        else
+          raise "You can only search for a single ticket based on id"
+        end
+      end
+
       def self.find(*options)
         if options[0].first.is_a? Array
           self.find_all.select do |project|
