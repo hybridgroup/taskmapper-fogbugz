@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafael George"]
   s.date = %q{2011-06-07}
-  s.description = %q{TODO: longer description of your gem}
-  s.email = %q{george.rafael@gmail.com}
+  s.description = %q{Ticketmaster provider for Fogbugz}
+  s.email = %q{rafael@hybridgroup.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -32,13 +32,14 @@ Gem::Specification.new do |s|
     "lib/ticketmaster-fogbugz.rb",
     "test/helper.rb",
     "test/test_project.rb",
-    "test/test_ticketmaster-fogbugz.rb"
+    "test/test_ticketmaster-fogbugz.rb",
+    "ticketmaster-fogbugz.gemspec"
   ]
   s.homepage = %q{http://github.com/cored/ticketmaster-fogbugz}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.1}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Ticketmaster provider for Fogbugz}
   s.test_files = [
     "test/helper.rb",
     "test/test_project.rb",
