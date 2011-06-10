@@ -21,12 +21,16 @@ module TicketMaster::Provider
       if auth[:email].nil? || auth[:password].nil? || auth[:uri].nil?
         raise "Please provide email, password and uri"
       end
-      @fogbugz = ::Fogbugz::Interface.new(auth)
-      @fogbugz.authenticate
-      TicketMaster::Provider::Fogbugz.api = @fogbugz
+      begin
+        @fogbugz = ::Fogbugz::Interface.new(auth)
+        TicketMaster::Provider::Fogbugz.api = @fogbugz
+        @fogbugz.authenticate
+      rescue Exception => ex
+        warn "There was a problem authenticaticating #{ex.message}"
+      end
     end
     # declare needed overloaded methods here
-    
+
     def projects(*options)
       Project.find(options)
     end
@@ -38,7 +42,16 @@ module TicketMaster::Provider
         Project.find_by_id(options.first)
       end
     end
-    
+
+    def valid?
+      begin 
+        @fogbugz.command(:search, :q => 'case')
+        true
+      rescue
+        false
+      end
+    end
+
   end
 end
 
