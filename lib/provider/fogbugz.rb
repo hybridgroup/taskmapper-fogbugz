@@ -21,13 +21,9 @@ module TicketMaster::Provider
       if auth[:email].nil? || auth[:password].nil? || auth[:uri].nil?
         raise "Please provide email, password and uri"
       end
-      begin
-        @fogbugz = ::Fogbugz::Interface.new(auth)
-        TicketMaster::Provider::Fogbugz.api = @fogbugz
-        @fogbugz.authenticate
-      rescue Exception => ex
-        warn "There was a problem authenticaticating #{ex.message}"
-      end
+      @fogbugz = ::Fogbugz::Interface.new(auth)
+      @fogbugz.authenticate
+      TicketMaster::Provider::Fogbugz.api = @fogbugz
     end
     # declare needed overloaded methods here
 
