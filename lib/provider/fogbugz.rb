@@ -18,12 +18,20 @@ module TicketMaster::Provider
     # parameters to access the API
     def authorize(auth = {})
       @authentication ||= TicketMaster::Authenticator.new(auth)
-      if auth[:email].nil? || auth[:password].nil? || auth[:uri].nil?
-        raise "Please provide email, password and uri"
+      auth = @authentication
+
+      unless auth.email? && auth.password? && auth.uri?
+        raise TicketMaster::Exception.new 'Please provide email, password and uri'
       end
-      @fogbugz = ::Fogbugz::Interface.new(auth)
-      @fogbugz.authenticate
-      TicketMaster::Provider::Fogbugz.api = @fogbugz
+
+      begin
+        @fogbugz = ::Fogbugz::Interface.new(:email => auth.email, 
+          :uri => auth.uri, :password => auth.password)
+        TicketMaster::Provider::Fogbugz.api = @fogbugz
+        @fogbugz.authenticate
+      rescue Exception => ex
+        warn "There was a problem authenticaticating #{ex.message}"
+      end
     end
     # declare needed overloaded methods here
 
