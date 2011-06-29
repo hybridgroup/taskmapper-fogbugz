@@ -40,11 +40,8 @@ module TicketMaster::Provider
     end
 
     def project(*options)
-      unless options.first.is_a? Fixnum 
-        raise "Search for a single project only works with a project id"
-      else
-        Project.find_by_id(options.first)
-      end
+      id = options.empty? ? 0 : options.first.to_i
+      Project.find_by_id(id)
     end
 
     def valid?
