@@ -30,10 +30,10 @@ GEM
     ticketmaster (0.6.6)
       activeresource
       activeresource (>= 2.3.2)
-      activesupport (>= 2.3.2)
       activesupport
-      hashie
+      activesupport (>= 2.3.2)
       hashie (= 1.0.0)
+      hashie
       jeweler
     typhoeus (0.2.4)
       mime-types
