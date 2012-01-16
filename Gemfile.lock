@@ -19,14 +19,12 @@ GEM
       git (>= 1.2.5)
       rake
     mime-types (1.16)
-    mocha (0.9.12)
+    minitest (2.10.0)
     rake (0.9.2)
     rcov (0.9.9)
     ruby-fogbugz (0.0.3)
       crack
       typhoeus
-    shoulda (2.11.3)
-    shoulda-context (1.0.0.beta1)
     ticketmaster (0.6.6)
       activeresource
       activeresource (>= 2.3.2)
@@ -43,11 +41,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.0.0)
   jeweler (~> 1.5.1)
-  mocha
+  minitest (~> 2.10.0)
   rcov
   ruby-fogbugz
-  shoulda
-  shoulda-context
   ticketmaster

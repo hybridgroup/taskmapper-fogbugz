@@ -8,10 +8,7 @@ source "http://rubygems.org"
 gem 'ticketmaster'
 gem "ruby-fogbugz"
 group :development do
-  gem "shoulda", ">= 0"
-  gem "shoulda-context"
-  gem "bundler", "~> 1.0.0"
+  gem "minitest", "~> 2.10.0"
   gem "jeweler", "~> 1.5.1"
   gem "rcov", ">= 0"
-  gem "mocha"
 end
