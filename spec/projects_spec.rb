@@ -12,6 +12,7 @@ describe TicketMaster::Provider::Fogbugz::Project do
   end
   
   it "should be able to load projects from an array of ids" do
+    pending
     @projects = @ticketmaster.projects([@project_id])
     @projects.should be_an_instance_of(Array)
     @projects.first.should be_an_instance_of(@klass)
@@ -19,6 +20,7 @@ describe TicketMaster::Provider::Fogbugz::Project do
   end
   
   it "should be able to load all projects from attributes" do
+    pending
     @projects = @ticketmaster.projects(:slug => @project_id)
     @projects.should be_an_instance_of(Array)
     @projects.first.should be_an_instance_of(@klass)
@@ -26,11 +28,13 @@ describe TicketMaster::Provider::Fogbugz::Project do
   end
   
   it "should be able to find a project" do
+    pending
     @ticketmaster.project.should == @klass
     @ticketmaster.project.find(@project_id).should be_an_instance_of(@klass)
   end
   
   it "should be able to find a project by slug" do
+    pending
     @ticketmaster.project(@project_id).should be_an_instance_of(@klass)
     @ticketmaster.project(@project_id).slug.should == @project_id
   end
