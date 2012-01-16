@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestProject < Test::Unit::TestCase
+describe ProjectSpec 
   CREDENTIALS = {:email => 'rafael@hybridgroup.com', :password => '123456', :uri => 'https://clutchapp.fogbugz.com'}
 
   def setup
