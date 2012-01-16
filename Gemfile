@@ -8,7 +8,7 @@ source "http://rubygems.org"
 gem 'ticketmaster'
 gem "ruby-fogbugz"
 group :development do
-  gem "rspec", "~> 1.3.0"
+  gem "rspec", "~> 2.0.0"
   gem "jeweler", "~> 1.5.1"
   gem "rcov", ">= 0"
 end
