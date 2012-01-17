@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe TicketMaster::Provider::Fogbugz::Project do
   before(:each) do
-	  @ticketmaster = TicketMaster.new(:fogbugz, :email => 'abc@g.com', :password => 'ie823d63js', :uri => 'http://test.fogbugz.com')
+	  @ticketmaster = TicketMaster.new(:fogbugz, :email => 'rafael@hybridgroup.com', :password => '1234567', :uri => 'https://hybridgroup.fogbugz.com')
     @klass = TicketMaster::Provider::Fogbugz::Project
   end
   
