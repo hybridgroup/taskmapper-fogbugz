@@ -61,9 +61,7 @@ module TicketMaster::Provider
 
       def self.find(*options)
         if options[0].first.is_a? Array
-          self.find_all.select do |project|
-            options[0].first.any? { |id| project.id == id }
-          end
+          options[0].first.collect { |project_id| self.find_by_id(project_id) }
         elsif options[0].first.is_a? Hash
           self.find_by_attributes(options[0].first)
         else
