@@ -1,0 +1,40 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=logon&password=1234567&email=rafael%40hybridgroup.com
+    body: 
+    headers: 
+      content-type: 
+      - text/xml
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      etag: 
+      - ""
+      x-aspnet-version: 
+      - 2.0.50727
+      transfer-encoding: 
+      - chunked
+      cache-control: 
+      - private
+      content-type: 
+      - text/xml;charset=utf-8
+      x-powered-by: 
+      - ASP.NET
+      expires: 
+      - Tue, 05 Sep 2000 09:00:00 GMT
+      date: 
+      - Wed, 21 Mar 2012 22:02:31 GMT
+      set-cookie: 
+      - sUniqueID=20120321220231-201.229.129.45-en0597j86h; expires=Tue, 22-Mar-2022 02:02:31 GMT; path=/; secure; HttpOnly
+      - ixPerson=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
+      - DBID=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
+      - 0xbeef=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
+      - fbToken=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
+      server: 
+      - Microsoft-IIS/6.0
+    body: <?xml version="1.0" encoding="UTF-8"?><response><token><![CDATA[26jgegikmofn27rcd6ql676fso9r22]]></token></response>
+    http_version: "1.1"

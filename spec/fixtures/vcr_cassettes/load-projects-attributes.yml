@@ -1,0 +1,36 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=listProjects&token=26jgegikmofn27rcd6ql676fso9r22
+    body: 
+    headers: 
+      content-type: 
+      - text/xml
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      etag: 
+      - ""
+      x-aspnet-version: 
+      - 2.0.50727
+      transfer-encoding: 
+      - chunked
+      cache-control: 
+      - private
+      content-type: 
+      - text/xml;charset=utf-8
+      x-powered-by: 
+      - ASP.NET
+      expires: 
+      - Tue, 05 Sep 2000 09:00:00 GMT
+      date: 
+      - Wed, 21 Mar 2012 22:02:34 GMT
+      set-cookie: 
+      - sUniqueID=20120321220234-201.229.129.45-hob3dtbrcd; expires=Tue, 22-Mar-2022 02:02:34 GMT; path=/; secure; HttpOnly
+      server: 
+      - Microsoft-IIS/6.0
+    body: <?xml version="1.0" encoding="UTF-8"?><response><projects><project><ixProject>2</ixProject><sProject><![CDATA[Inbox]]></sProject><ixPersonOwner>2</ixPersonOwner><sPersonOwner><![CDATA[Ramon Martinez]]></sPersonOwner><sEmail><![CDATA[rafael@hybridgroup.com]]></sEmail><sPhone></sPhone><fInbox>true</fInbox><ixWorkflow>1</ixWorkflow><fDeleted>false</fDeleted></project><project><ixProject>1</ixProject><sProject><![CDATA[Sample Project]]></sProject><ixPersonOwner>2</ixPersonOwner><sPersonOwner><![CDATA[Ramon Martinez]]></sPersonOwner><sEmail><![CDATA[rafael@hybridgroup.com]]></sEmail><sPhone></sPhone><fInbox>false</fInbox><ixWorkflow>1</ixWorkflow><fDeleted>false</fDeleted></project></projects></response>
+    http_version: "1.1"

@@ -1,0 +1,36 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=search&cols=dtLastUpdated%2CixBug%2CsStatus%2CsTitle%2CsLatestTextSummary%2CixProject%2CsProject%2CsPersonAssignedTo%2CsPriority&token=26jgegikmofn27rcd6ql676fso9r22&q=project%3A%3D2
+    body: 
+    headers: 
+      content-type: 
+      - text/xml
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      expires: 
+      - Tue, 05 Sep 2000 09:00:00 GMT
+      etag: 
+      - ""
+      content-type: 
+      - text/xml;charset=utf-8
+      cache-control: 
+      - private
+      x-powered-by: 
+      - ASP.NET
+      date: 
+      - Wed, 21 Mar 2012 22:25:46 GMT
+      transfer-encoding: 
+      - chunked
+      x-aspnet-version: 
+      - 2.0.50727
+      server: 
+      - Microsoft-IIS/6.0
+      set-cookie: 
+      - sUniqueID=20120321222546-201.229.129.45-dh6dnqjemp; expires=Tue, 22-Mar-2022 02:25:46 GMT; path=/; secure; HttpOnly
+    body: <?xml version="1.0" encoding="UTF-8"?><response><cases count="1"><case ixBug="1" operations="edit,assign,resolve,email,remind"><ixBug>1</ixBug><sStatus><![CDATA[Active]]></sStatus><sTitle><![CDATA["Welcome to FogBugz" Sample Case]]></sTitle><sLatestTextSummary></sLatestTextSummary><ixProject>2</ixProject><sProject><![CDATA[Inbox]]></sProject><sPersonAssignedTo><![CDATA[Ramon Martinez]]></sPersonAssignedTo><sPriority><![CDATA[Must Fix]]></sPriority><dtLastUpdated>2012-03-21T21:27:33Z</dtLastUpdated></case></cases></response>
+    http_version: "1.1"
