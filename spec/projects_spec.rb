@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe TicketMaster::Provider::Fogbugz::Project do
   before(:each) do
 	  VCR.use_cassette('fogbugz') do 
-      @ticketmaster = TicketMaster.new(:fogbugz, :email => 'rafael@hybridgroup.com', :password => '1234567', :uri => 'https://hybridgroup.fogbugz.com')
+      @ticketmaster = TicketMaster.new(:fogbugz, :email => 'rafael@hybridgroup.com', :password => '1234567', :uri => 'https://ticketrb.fogbugz.com')
     end
     @klass = TicketMaster::Provider::Fogbugz::Project
     @project_id = 2
