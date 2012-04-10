@@ -11,7 +11,6 @@ group :development do
   gem "rspec", "~> 2.0"
   gem "fakeweb", "~> 1.3"
   gem "vcr", "~> 1.11"
-  gem "jeweler", "~> 1.5"
   gem "simplecov", "~> 0.5", :platforms => :ruby_19
   gem "rcov", "~> 1.0", :platforms => :ruby_18
 end
