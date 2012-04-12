@@ -58,6 +58,16 @@ module TicketMaster::Provider
           raise "You can only search for a single ticket based on id"
         end
       end
+      
+      def ticket!(*args)
+        return ticket_with! args.first if !args.empty? && args.first.is_a?(Hash)
+        
+        ticket_with! :title => args[0], :description => args[1]
+      end
+      
+      def ticket_with!(attributes_hash)
+        provider_parent(self.class)::Ticket.create(id, attributes_hash)
+      end
 
       def self.find(*options)
         if options[0].first.is_a? Array
@@ -87,5 +97,3 @@ module TicketMaster::Provider
     end
   end
 end
-
-

@@ -84,6 +84,14 @@ module TicketMaster::Provider
         warn "Fogbugz API doesn't support comments"
       end
 
+      def self.create(projectId, attributes_hash)
+        options = translate attributes_hash, :title => :sTitle
+          
+        new_case = TicketMaster::Provider::Fogbugz.api.command(:new, options)
+        
+        self.new attributes_hash.merge! :id => new_case["case"]["ixBug"]
+      end
+      
       def self.find(project_id, options)
         if options.first.is_a? Array
           self.find_all(project_id).select do |ticket|
@@ -111,6 +119,11 @@ module TicketMaster::Provider
         end
         tickets.flatten.map { |xticket| self.new xticket }
       end
+      
+      private
+        def self.translate(hash, mapping)
+          Hash[hash.map { |k, v| [mapping[k] ||= k, v]}]
+        end
     end
   end
 end
