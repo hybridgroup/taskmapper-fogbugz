@@ -38,9 +38,9 @@ describe TicketMaster::Provider::Fogbugz::Ticket do
   end
   
   it "should be able to create a ticket" do
-    VCR.use_cassette('fogbugz-single-ticket') {  @ticket = @project.ticket! :title => "test ticket #{Time.now}" }
+    VCR.use_cassette('create-ticket') {  @ticket = @project.ticket! :title => "Should be able to create ticket" }
     @ticket.should be_an_instance_of(@klass)
-    @ticket.id.should not_be_nil
+    @ticket.id.should_not be_nil
   end
 
 end
