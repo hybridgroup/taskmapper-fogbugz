@@ -36,5 +36,11 @@ describe TicketMaster::Provider::Fogbugz::Ticket do
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == @ticket_id
   end
+  
+  it "should be able to create a ticket" do
+    VCR.use_cassette('fogbugz-single-ticket') {  @ticket = @project.ticket! :title => "test ticket #{Time.now}" }
+    @ticket.should be_an_instance_of(@klass)
+    @ticket.id.should not_be_nil
+  end
 
 end
