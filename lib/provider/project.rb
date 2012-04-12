@@ -66,7 +66,7 @@ module TicketMaster::Provider
       end
       
       def ticket_with!(attributes_hash)
-        provider_parent(self.class)::Ticket.create(id, attributes_hash)
+        provider_parent(self.class)::Ticket.create(attributes_hash.merge :project_id => id)
       end
 
       def self.find(*options)

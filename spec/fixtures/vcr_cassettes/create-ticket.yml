@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction 
   request: !ruby/struct:VCR::Request 
     method: :get
-    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=new&sTitle=Should+be+able+to+create+ticket&token=26jgegikmofn27rcd6ql676fso9r22
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=new&sTitle=Should+be+able+to+create+ticket&ixPriority=2&ixPersonAssignedTo=ticketmaster&token=26jgegikmofn27rcd6ql676fso9r22&ixProject=2
     body: 
     headers: 
       content-type: 
@@ -12,25 +12,25 @@
       code: 200
       message: OK
     headers: 
-      expires: 
-      - Tue, 05 Sep 2000 09:00:00 GMT
-      date: 
-      - Thu, 12 Apr 2012 19:10:18 GMT
-      transfer-encoding: 
-      - chunked
       content-type: 
       - text/xml;charset=utf-8
-      set-cookie: 
-      - sUniqueID=20120412191018-190.80.182.182-11c07e1n97; expires=Tue, 12-Apr-2022 23:10:18 GMT; path=/; secure; HttpOnly
       cache-control: 
       - private
-      x-powered-by: 
-      - ASP.NET
-      server: 
-      - Microsoft-IIS/6.0
-      x-aspnet-version: 
-      - 2.0.50727
       etag: 
       - ""
-    body: <?xml version="1.0" encoding="UTF-8"?><response><case ixBug="3" operations="edit,assign,resolve,email,remind"></case></response>
+      server: 
+      - Microsoft-IIS/6.0
+      x-powered-by: 
+      - ASP.NET
+      date: 
+      - Thu, 12 Apr 2012 21:00:39 GMT
+      expires: 
+      - Tue, 05 Sep 2000 09:00:00 GMT
+      x-aspnet-version: 
+      - 2.0.50727
+      transfer-encoding: 
+      - chunked
+      set-cookie: 
+      - sUniqueID=20120412210038-190.80.182.182-t0jq6j8938; expires=Wed, 13-Apr-2022 01:00:38 GMT; path=/; secure; HttpOnly
+    body: <?xml version="1.0" encoding="UTF-8"?><response><case ixBug="4" operations="edit,assign,resolve,email,remind"></case></response>
     http_version: "1.1"
