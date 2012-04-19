@@ -37,6 +37,10 @@ module TicketMaster::Provider
       def title
         self['sTitle']
       end
+      
+      def title=(val)
+        self['sTitle'] = val
+      end
 
       def description 
         self['LatestTextSummary']
@@ -98,8 +102,12 @@ module TicketMaster::Provider
           :project_id => :ixProject
         
         new_case = TicketMaster::Provider::Fogbugz.api.command(:new, options)
-        
-        self.new options.merge :id => new_case["case"]["ixBug"]
+                
+        self.new options.merge :ixBug => new_case["case"]["ixBug"]
+      end
+      
+      def save
+        !update_case.has_key?("error")  
       end
       
       def self.find(project_id, options)
@@ -131,8 +139,20 @@ module TicketMaster::Provider
       end
       
       private
+        def update_case
+          TicketMaster::Provider::Fogbugz.api.command :edit, to_case_hash
+        end
+        
         def self.translate(hash, mapping)
           Hash[hash.map { |k, v| [mapping[k] ||= k, v]}]
+        end
+        
+        #just title until now
+        def to_case_hash
+          { 
+            :ixBug => id,
+            :sTitle => title 
+          }
         end
     end
   end

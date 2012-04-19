@@ -45,10 +45,18 @@ describe TicketMaster::Provider::Fogbugz::Ticket do
         :priority => 2,
         :assignee => 'ticketmaster'
     end
-    
+        
     ticket.should be_an_instance_of(@klass)
     ticket.id.should_not be_nil
     ticket.project_id.should == @project.id
+  end
+  
+  it "should be able to update a ticket" do
+    ticket = nil
+    VCR.use_cassette('fogbugz-single-ticket') {  ticket = @project.ticket @ticket_id }
+    ticket.title = "updated"
+    VCR.use_cassette('update-ticket') {  ticket.save.should == true }
+    ticket.title.should == "updated" 
   end
 
 end

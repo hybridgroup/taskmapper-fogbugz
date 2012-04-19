@@ -1,0 +1,36 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=edit&ixBug=1&sTitle=updated&token=26jgegikmofn27rcd6ql676fso9r22
+    body: 
+    headers: 
+      content-type: 
+      - text/xml
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      set-cookie: 
+      - sUniqueID=20120419154527-190.166.7.121-73sn3rn18n; expires=Tue, 19-Apr-2022 19:45:27 GMT; path=/; secure; HttpOnly
+      expires: 
+      - Tue, 05 Sep 2000 09:00:00 GMT
+      server: 
+      - Microsoft-IIS/6.0
+      cache-control: 
+      - private
+      content-type: 
+      - text/xml;charset=utf-8
+      etag: 
+      - ""
+      transfer-encoding: 
+      - chunked
+      x-aspnet-version: 
+      - 2.0.50727
+      date: 
+      - Thu, 19 Apr 2012 15:45:27 GMT
+      x-powered-by: 
+      - ASP.NET
+    body: <?xml version="1.0" encoding="UTF-8"?><response><case ixBug="1" operations="edit,assign,resolve,email,remind"></case></response>
+    http_version: "1.1"
