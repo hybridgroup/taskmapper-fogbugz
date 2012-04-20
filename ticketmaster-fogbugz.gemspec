@@ -3,100 +3,30 @@
 # Instead, edit Jeweler::Tasks in Rakefile, and run 'rake gemspec'
 # -*- encoding: utf-8 -*-
 
-Gem::Specification.new do |s|
-  s.name = "ticketmaster-fogbugz"
-  s.version = "0.2.4"
+require File.expand_path('../lib/version', __FILE__)
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Rafael George"]
-  s.date = "2012-03-21"
-  s.description = "Allows ticketmaster to interact with Fogbugz."
-  s.email = "rafael@hybridgroup.com"
-  s.extra_rdoc_files = [
-    "LICENSE.txt",
-    "README.rdoc"
-  ]
-  s.files = [
-    ".document",
-    ".rbenv-gemsets",
-    ".rbenv-version",
-    ".rvmrc",
-    ".travis.yml",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.rdoc",
-    "Rakefile",
-    "VERSION",
-    "lib/provider/comment.rb",
-    "lib/provider/fogbugz.rb",
-    "lib/provider/project.rb",
-    "lib/provider/ticket.rb",
-    "lib/ticketmaster-fogbugz.rb",
-    "spec/fixtures/vcr_cassettes/all-fogbugz-projects.yml",
-    "spec/fixtures/vcr_cassettes/fogbugz-projects.yml",
-    "spec/fixtures/vcr_cassettes/fogbugz-single-ticket.yml",
-    "spec/fixtures/vcr_cassettes/fogbugz-tickets-by-attributes.yml",
-    "spec/fixtures/vcr_cassettes/fogbugz-tickets-by-ids.yml",
-    "spec/fixtures/vcr_cassettes/fogbugz-tickets.yml",
-    "spec/fixtures/vcr_cassettes/fogbugz.yml",
-    "spec/fixtures/vcr_cassettes/load-project-by-id.yml",
-    "spec/fixtures/vcr_cassettes/load-projects-attributes.yml",
-    "spec/fixtures/vcr_cassettes/load-projects-by-ids.yml",
-    "spec/projects_spec.rb",
-    "spec/spec_helper.rb",
-    "spec/tickets_spec.rb",
-    "spec/vcr_setup.rb",
-    "test/helper.rb",
-    "test/test_project.rb",
-    "test/test_ticketmaster-fogbugz.rb",
-    "ticketmaster-fogbugz.gemspec"
-  ]
-  s.homepage = "http://github.com/hybridgroup/ticketmaster-fogbugz"
-  s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.15"
-  s.summary = "Ticketmaster Provider for Fogbugz"
-  s.test_files = [
-    "spec/projects_spec.rb",
-    "spec/spec_helper.rb",
-    "spec/tickets_spec.rb",
-    "spec/vcr_setup.rb",
-    "test/helper.rb",
-    "test/test_project.rb",
-    "test/test_ticketmaster-fogbugz.rb"
-  ]
+Gem::Specification.new do |gem|
+  gem.authors       = ["Rafael George"]
+  gem.email         = ["rafael@hybridgroup.com"]
+  gem.description   = %q{Allows ticketmaster to interact with Fogbugz.}
+  gem.summary       = %q{Allows ticketmaster to interact with Fogbugz.}
+  gem.homepage      = ""
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
+  gem.files         = `git ls-files`.split($\)
+  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.name          = "ticketmaster-fogbugz"
+  gem.require_paths = ["lib"]
+  gem.version       = Ticketmaster::Fogbugz::VERSION
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ticketmaster>, ["= 0.6.10"])
-      s.add_runtime_dependency(%q<ruby-fogbugz>, ["~> 0.1"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.0"])
-      s.add_development_dependency(%q<fakeweb>, ["~> 1.3"])
-      s.add_development_dependency(%q<vcr>, ["~> 1.11"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5"])
-      s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
-      s.add_development_dependency(%q<rcov>, ["~> 1.0"])
-    else
-      s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
-      s.add_dependency(%q<ruby-fogbugz>, ["~> 0.1"])
-      s.add_dependency(%q<rspec>, ["~> 2.0"])
-      s.add_dependency(%q<fakeweb>, ["~> 1.3"])
-      s.add_dependency(%q<vcr>, ["~> 1.11"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5"])
-      s.add_dependency(%q<simplecov>, ["~> 0.5"])
-      s.add_dependency(%q<rcov>, ["~> 1.0"])
-    end
-  else
-    s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
-    s.add_dependency(%q<ruby-fogbugz>, ["~> 0.1"])
-    s.add_dependency(%q<rspec>, ["~> 2.0"])
-    s.add_dependency(%q<fakeweb>, ["~> 1.3"])
-    s.add_dependency(%q<vcr>, ["~> 1.11"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5"])
-    s.add_dependency(%q<simplecov>, ["~> 0.5"])
-    s.add_dependency(%q<rcov>, ["~> 1.0"])
-  end
+  gem.add_dependency 'ticketmaster', '~> 0.7'
+  gem.add_dependency 'rake', '~> 0.9'
+  gem.add_dependency 'ruby-fogbugz', '~> 0.1'
+
+  gem.add_development_dependency 'rspec', '~> 2.0'
+  gem.add_development_dependency 'fakeweb', '~> 1.3'
+  gem.add_development_dependency 'vcr', '~> 1.11'
+  gem.add_development_dependency 'simplecov', '~> 0.5', :platforms => :ruby_19
+  gem.add_development_dependency 'rcov', '~> 1.0', :platforms => :ruby_18
+
 end
-
