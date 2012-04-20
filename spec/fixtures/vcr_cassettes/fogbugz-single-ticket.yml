@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction 
   request: !ruby/struct:VCR::Request 
     method: :get
-    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=search&cols=dtLastUpdated%2CixBug%2CsStatus%2CsTitle%2CsLatestTextSummary%2CixProject%2CsProject%2CsPersonAssignedTo%2CsPriority&token=26jgegikmofn27rcd6ql676fso9r22&q=project%3A%3D2
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=search&q=project%3A%3D2&cols=dtLastUpdated%2CixBug%2CsStatus%2CsTitle%2CsLatestTextSummary%2CixProject%2CsProject%2CsPersonAssignedTo%2CsPriority&token=26jgegikmofn27rcd6ql676fso9r22
     body: 
     headers: 
       content-type: 
@@ -12,25 +12,25 @@
       code: 200
       message: OK
     headers: 
+      set-cookie: 
+      - sUniqueID=20120412185552-190.80.182.182-q1b9qu3lcg; expires=Tue, 12-Apr-2022 22:55:52 GMT; path=/; secure; HttpOnly
       expires: 
       - Tue, 05 Sep 2000 09:00:00 GMT
-      etag: 
-      - ""
-      content-type: 
-      - text/xml;charset=utf-8
-      cache-control: 
-      - private
       x-powered-by: 
       - ASP.NET
-      date: 
-      - Wed, 21 Mar 2012 22:26:48 GMT
-      transfer-encoding: 
-      - chunked
-      x-aspnet-version: 
-      - 2.0.50727
+      etag: 
+      - ""
       server: 
       - Microsoft-IIS/6.0
-      set-cookie: 
-      - sUniqueID=20120321222648-201.229.129.45-p2obga736n; expires=Tue, 22-Mar-2022 02:26:48 GMT; path=/; secure; HttpOnly
+      date: 
+      - Thu, 12 Apr 2012 18:56:20 GMT
+      cache-control: 
+      - private
+      x-aspnet-version: 
+      - 2.0.50727
+      content-type: 
+      - text/xml;charset=utf-8
+      transfer-encoding: 
+      - chunked
     body: <?xml version="1.0" encoding="UTF-8"?><response><cases count="1"><case ixBug="1" operations="edit,assign,resolve,email,remind"><ixBug>1</ixBug><sStatus><![CDATA[Active]]></sStatus><sTitle><![CDATA["Welcome to FogBugz" Sample Case]]></sTitle><sLatestTextSummary></sLatestTextSummary><ixProject>2</ixProject><sProject><![CDATA[Inbox]]></sProject><sPersonAssignedTo><![CDATA[Ramon Martinez]]></sPersonAssignedTo><sPriority><![CDATA[Must Fix]]></sPriority><dtLastUpdated>2012-03-21T21:27:33Z</dtLastUpdated></case></cases></response>
     http_version: "1.1"

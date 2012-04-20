@@ -58,6 +58,10 @@ module TicketMaster::Provider
           raise "You can only search for a single ticket based on id"
         end
       end
+            
+      def ticket!(attributes_hash)
+        provider_parent(self.class)::Ticket.create(attributes_hash.merge :project_id => id)
+      end
 
       def self.find(*options)
         if options[0].first.is_a? Array
@@ -87,5 +91,3 @@ module TicketMaster::Provider
     end
   end
 end
-
-

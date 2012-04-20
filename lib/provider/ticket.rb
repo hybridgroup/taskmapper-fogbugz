@@ -69,6 +69,10 @@ module TicketMaster::Provider
       def created_at
         nil
       end
+      
+      def project_id
+        self["ixProject"]
+      end
 
       def updated_at
         Time.parse(self['dtLastUpdated'])
@@ -83,7 +87,21 @@ module TicketMaster::Provider
         nil
         warn "Fogbugz API doesn't support comments"
       end
-
+      
+      def self.create(attributes_hash)
+        warn "Fogbugz Case doesn't not handle description'" if attributes_hash.has_key? :description
+        
+        options = translate attributes_hash, 
+          :title => :sTitle,
+          :priority => :ixPriority,
+          :assignee => :ixPersonAssignedTo,
+          :project_id => :ixProject
+        
+        new_case = TicketMaster::Provider::Fogbugz.api.command(:new, options)
+        
+        self.new options.merge :id => new_case["case"]["ixBug"]
+      end
+      
       def self.find(project_id, options)
         if options.first.is_a? Array
           self.find_all(project_id).select do |ticket|
@@ -111,6 +129,11 @@ module TicketMaster::Provider
         end
         tickets.flatten.map { |xticket| self.new xticket }
       end
+      
+      private
+        def self.translate(hash, mapping)
+          Hash[hash.map { |k, v| [mapping[k] ||= k, v]}]
+        end
     end
   end
 end
