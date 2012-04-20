@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "ticketmaster-fogbugz"
   gem.require_paths = ["lib"]
-  gem.version       = Ticketmaster::Fogbugz::VERSION
+  gem.version       = TicketMaster::Fogbugz::VERSION
 
   gem.add_dependency 'ticketmaster', '~> 0.7'
   gem.add_dependency 'rake', '~> 0.9'
@@ -26,7 +26,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec', '~> 2.0'
   gem.add_development_dependency 'fakeweb', '~> 1.3'
   gem.add_development_dependency 'vcr', '~> 1.11'
-  gem.add_development_dependency 'simplecov', '~> 0.5', :platforms => :ruby_19
-  gem.add_development_dependency 'rcov', '~> 1.0', :platforms => :ruby_18
-
+  gem.add_development_dependency 'rcov', '~> 1.0'
 end
