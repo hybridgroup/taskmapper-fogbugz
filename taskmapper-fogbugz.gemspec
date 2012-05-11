@@ -8,18 +8,18 @@ require File.expand_path('../lib/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Rafael George"]
   gem.email         = ["rafael@hybridgroup.com"]
-  gem.description   = %q{Allows ticketmaster to interact with Fogbugz.}
-  gem.summary       = %q{Allows ticketmaster to interact with Fogbugz.}
+  gem.description   = %q{Allows taskmapper to interact with Fogbugz.}
+  gem.summary       = %q{Allows taskmapper to interact with Fogbugz.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "ticketmaster-fogbugz"
+  gem.name          = "taskmapper-fogbugz"
   gem.require_paths = ["lib"]
-  gem.version       = TicketMaster::Fogbugz::VERSION
+  gem.version       = TaskMapper::Fogbugz::VERSION
 
-  gem.add_dependency 'ticketmaster', '~> 0.7'
+  gem.add_dependency 'taskmapper', '~> 0.7'
   gem.add_dependency 'rake', '~> 0.9'
   gem.add_dependency 'ruby-fogbugz', '~> 0.1'
 
