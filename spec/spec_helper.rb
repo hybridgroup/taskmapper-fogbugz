@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rubygems'
 require 'taskmapper'
-require 'ticketmaster-fogbugz'
+require 'taskmapper-fogbugz'
 require 'rspec'
 require 'vcr'
 require 'vcr_setup'
