@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Fogbugz
-    # Project class for ticketmaster-fogbugz
+    # Project class for taskmapper-fogbugz
     #
     #
-    class Project < TicketMaster::Provider::Base::Project
+    class Project < TaskMapper::Provider::Base::Project
       #API = Fogbugz::Project # The class to access the api's projects
       # declare needed overloaded methods here
 
@@ -83,7 +83,7 @@ module TicketMaster::Provider
 
       def self.find_all
         projects = []
-        TicketMaster::Provider::Fogbugz.api.command(:listProjects).each do |project|
+        TaskMapper::Provider::Fogbugz.api.command(:listProjects).each do |project|
           projects << project[1]['project'].map { |xpro| self.new xpro }
         end
         projects.flatten

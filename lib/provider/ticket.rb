@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Fogbugz
-    # Ticket class for ticketmaster-fogbugz
+    # Ticket class for taskmapper-fogbugz
     #
     
-    class Ticket < TicketMaster::Provider::Base::Ticket
+    class Ticket < TaskMapper::Provider::Base::Ticket
       #API = Fogbugz::Ticket # The class to access the api's tickets
       # declare needed overloaded methods here
       
@@ -101,7 +101,7 @@ module TicketMaster::Provider
           :assignee => :ixPersonAssignedTo,
           :project_id => :ixProject
         
-        new_case = TicketMaster::Provider::Fogbugz.api.command(:new, options)
+        new_case = TaskMapper::Provider::Fogbugz.api.command(:new, options)
                 
         self.new options.merge :ixBug => new_case["case"]["ixBug"]
       end
@@ -132,7 +132,7 @@ module TicketMaster::Provider
 
       def self.find_all(project_id)
         tickets = []
-        TicketMaster::Provider::Fogbugz.api.command(:search, :q => "project:=#{project_id}", :cols =>"dtLastUpdated,ixBug,sStatus,sTitle,sLatestTextSummary,ixProject,sProject,sPersonAssignedTo,sPriority").each do |ticket|
+        TaskMapper::Provider::Fogbugz.api.command(:search, :q => "project:=#{project_id}", :cols =>"dtLastUpdated,ixBug,sStatus,sTitle,sLatestTextSummary,ixProject,sProject,sPersonAssignedTo,sPriority").each do |ticket|
           tickets << ticket[1]["case"]
         end
         tickets.flatten.map { |xticket| self.new xticket }
@@ -140,7 +140,7 @@ module TicketMaster::Provider
       
       private
         def update_case
-          TicketMaster::Provider::Fogbugz.api.command :edit, to_case_hash
+          TaskMapper::Provider::Fogbugz.api.command :edit, to_case_hash
         end
         
         def self.translate(hash, mapping)

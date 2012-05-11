@@ -1,11 +1,11 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Fogbugz
-    # The comment class for ticketmaster-fogbugz
+    # The comment class for taskmapper-fogbugz
     #
-    # Do any mapping between Ticketmaster and your system's comment model here
+    # Do any mapping between taskmapper and your system's comment model here
     # versions of the ticket.
     #
-    class Comment < TicketMaster::Provider::Base::Comment
+    class Comment < TaskMapper::Provider::Base::Comment
       #API = Fogbugz::Comment # The class to access the api's comments
       # declare needed overloaded methods here
       

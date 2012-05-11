@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'ticketmaster', '~> 0.7'
+gem 'taskmapper', '~> 0.8'
 gem 'rake', '~> 0.9'
 gem 'ruby-fogbugz', '~> 0.1'
 

@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction 
   request: !ruby/struct:VCR::Request 
     method: :get
-    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=new&sTitle=Should+be+able+to+create+ticket&ixPriority=2&ixPersonAssignedTo=ticketmaster&token=26jgegikmofn27rcd6ql676fso9r22&ixProject=2
+    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=new&sTitle=Should+be+able+to+create+ticket&ixPriority=2&ixPersonAssignedTo=taskmapper&token=26jgegikmofn27rcd6ql676fso9r22&ixProject=2
     body: 
     headers: 
       content-type: 

@@ -1,5 +1,4 @@
 #require YOUR_PROVIDER_API
-require 'ticketmaster'
 require 'fogbugz'
 
 %w{ fogbugz ticket project comment }.each do |f|

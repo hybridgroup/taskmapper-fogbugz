@@ -1,14 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe TicketMaster::Provider::Fogbugz::Ticket do
+describe TaskMapper::Provider::Fogbugz::Ticket do
   before(:each) do
     VCR.use_cassette('fogbugz') do 
-      @ticketmaster = TicketMaster.new(:fogbugz, :email => 'rafael@hybridgroup.com', :password => '1234567', :uri => 'https://ticketrb.fogbugz.com')
+      @taskmapper = TaskMapper.new(:fogbugz, :email => 'rafael@hybridgroup.com', :password => '1234567', :uri => 'https://ticketrb.fogbugz.com')
     end
-    VCR.use_cassette('fogbugz-projects') { @project = @ticketmaster.project(2) }
+    VCR.use_cassette('fogbugz-projects') { @project = @taskmapper.project(2) }
     @ticket_id = 1
-    @klass = TicketMaster::Provider::Fogbugz::Ticket
-    @comment_klass = TicketMaster::Provider::Fogbugz::Comment
+    @klass = TaskMapper::Provider::Fogbugz::Ticket
+    @comment_klass = TaskMapper::Provider::Fogbugz::Comment
   end
 
   it "should be able to load all tickets" do
@@ -43,7 +43,7 @@ describe TicketMaster::Provider::Fogbugz::Ticket do
     VCR.use_cassette('create-ticket') do  
       ticket = @project.ticket! :title => "Should be able to create ticket",
         :priority => 2,
-        :assignee => 'ticketmaster'
+        :assignee => 'taskmapper'
     end
         
     ticket.should be_an_instance_of(@klass)
