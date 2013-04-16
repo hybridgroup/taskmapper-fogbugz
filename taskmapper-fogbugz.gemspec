@@ -19,8 +19,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = TaskMapper::Fogbugz::VERSION
 
-  gem.add_dependency 'taskmapper', '~> 0.7'
-  gem.add_dependency 'rake', '~> 0.9'
+  gem.add_dependency 'taskmapper'
+  gem.add_dependency 'rake'
   gem.add_dependency 'ruby-fogbugz', '~> 0.1'
 
   gem.add_development_dependency 'rspec', '~> 2.0'
