@@ -1,1 +1,1 @@
-rvm 1.8.7@ticketmaster-fogbugz --create
+rvm 1.9.2@ticketmaster-fogbugz --create
