@@ -8,12 +8,12 @@ module TaskMapper::Provider
 
     #TICKET_API = Fogbugz::Ticket # The class to access the api's tickets
     #PROJECT_API = Fogbugz::Project # The class to access the api's projects
-    
+
     # This is for cases when you want to instantiate using TaskMapper::Provider::Fogbugz.new(auth)
     def self.new(auth = {})
       TaskMapper.new(:fogbugz, auth)
     end
-    
+
     # Providers must define an authorize method. This is used to initialize and set authentication
     # parameters to access the API
     def authorize(auth = {})
@@ -25,7 +25,7 @@ module TaskMapper::Provider
       end
 
       begin
-        @fogbugz = ::Fogbugz::Interface.new(:email => auth.email, 
+        @fogbugz = ::Fogbugz::Interface.new(:email => auth.email,
           :uri => auth.uri, :password => auth.password)
         TaskMapper::Provider::Fogbugz.api = @fogbugz
         @fogbugz.authenticate
@@ -45,7 +45,7 @@ module TaskMapper::Provider
     end
 
     def valid?
-      begin 
+      begin
         @fogbugz.command(:search, :q => 'case')
         true
       rescue

@@ -14,8 +14,8 @@ module TaskMapper::Provider
             @system_data = {:client => object}
             hash = {:id => object['ixProject'].to_i,
               :name => object['sProject'],
-              :description => object['sProject'], 
-              :created_at => nil, 
+              :description => object['sProject'],
+              :created_at => nil,
               :updated_at => nil}
           else
             hash = object
@@ -58,7 +58,7 @@ module TaskMapper::Provider
           raise "You can only search for a single ticket based on id"
         end
       end
-            
+
       def ticket!(attributes_hash)
         provider_parent(self.class)::Ticket.create(attributes_hash.merge :project_id => id)
       end

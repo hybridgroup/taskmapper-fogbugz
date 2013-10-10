@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe TaskMapper::Provider::Fogbugz::Ticket do
   before(:each) do
-    VCR.use_cassette('fogbugz') do 
+    VCR.use_cassette('fogbugz') do
       @taskmapper = TaskMapper.new(:fogbugz, :email => 'rafael@hybridgroup.com', :password => '1234567', :uri => 'https://ticketrb.fogbugz.com')
     end
     VCR.use_cassette('fogbugz-projects') { @project = @taskmapper.project(2) }
@@ -36,27 +36,27 @@ describe TaskMapper::Provider::Fogbugz::Ticket do
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == @ticket_id
   end
-  
+
   it "should be able to create a ticket" do
     ticket = nil
-    
-    VCR.use_cassette('create-ticket') do  
+
+    VCR.use_cassette('create-ticket') do
       ticket = @project.ticket! :title => "Should be able to create ticket",
         :priority => 2,
         :assignee => 'taskmapper'
     end
-        
+
     ticket.should be_an_instance_of(@klass)
     ticket.id.should_not be_nil
     ticket.project_id.should == @project.id
   end
-  
+
   it "should be able to update a ticket" do
     ticket = nil
     VCR.use_cassette('fogbugz-single-ticket') {  ticket = @project.ticket @ticket_id }
     ticket.title = "updated"
     VCR.use_cassette('update-ticket') {  ticket.save.should == true }
-    ticket.title.should == "updated" 
+    ticket.title.should == "updated"
   end
 
 end

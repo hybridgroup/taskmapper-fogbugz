@@ -8,7 +8,7 @@ module TaskMapper::Provider
     class Comment < TaskMapper::Provider::Base::Comment
       #API = Fogbugz::Comment # The class to access the api's comments
       # declare needed overloaded methods here
-      
+
     end
   end
 end

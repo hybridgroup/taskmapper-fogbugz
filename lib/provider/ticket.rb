@@ -2,11 +2,11 @@ module TaskMapper::Provider
   module Fogbugz
     # Ticket class for taskmapper-fogbugz
     #
-    
+
     class Ticket < TaskMapper::Provider::Base::Ticket
       #API = Fogbugz::Ticket # The class to access the api's tickets
       # declare needed overloaded methods here
-      
+
       def initialize(*object)
         if object.first
           object = object.first
@@ -14,10 +14,10 @@ module TaskMapper::Provider
             @system_data = {:client => object}
             hash = {:id => object['ixBug'],
               :title => object['sTitle'],
-              :description => object['sLatestTextSummary'], 
+              :description => object['sLatestTextSummary'],
               :status => object['sStatus'],
               :project_id => object['ixProject'],
-              :resolution => nil, 
+              :resolution => nil,
               :requestor => nil,
               :priority => object['sPriority'],
               :assignee => object['sPersonAssignedTo'],
@@ -37,12 +37,12 @@ module TaskMapper::Provider
       def title
         self['sTitle']
       end
-      
+
       def title=(val)
         self['sTitle'] = val
       end
 
-      def description 
+      def description
         self['LatestTextSummary']
       end
 
@@ -73,7 +73,7 @@ module TaskMapper::Provider
       def created_at
         nil
       end
-      
+
       def project_id
         self["ixProject"]
       end
@@ -91,25 +91,25 @@ module TaskMapper::Provider
         nil
         warn "Fogbugz API doesn't support comments"
       end
-      
+
       def self.create(attributes_hash)
         warn "Fogbugz Case doesn't not handle description'" if attributes_hash.has_key? :description
-        
-        options = translate attributes_hash, 
+
+        options = translate attributes_hash,
           :title => :sTitle,
           :priority => :ixPriority,
           :assignee => :ixPersonAssignedTo,
           :project_id => :ixProject
-        
+
         new_case = TaskMapper::Provider::Fogbugz.api.command(:new, options)
-                
+
         self.new options.merge :ixBug => new_case["case"]["ixBug"]
       end
-      
+
       def save
-        !update_case.has_key?("error")  
+        !update_case.has_key?("error")
       end
-      
+
       def self.find(project_id, options)
         if options.first.is_a? Array
           self.find_all(project_id).select do |ticket|
@@ -137,21 +137,21 @@ module TaskMapper::Provider
         end
         tickets.flatten.map { |xticket| self.new xticket }
       end
-      
+
       private
         def update_case
           TaskMapper::Provider::Fogbugz.api.command :edit, to_case_hash
         end
-        
+
         def self.translate(hash, mapping)
           Hash[hash.map { |k, v| [mapping[k] ||= k, v]}]
         end
-        
+
         #just title until now
         def to_case_hash
-          { 
+          {
             :ixBug => id,
-            :sTitle => title 
+            :sTitle => title
           }
         end
     end
