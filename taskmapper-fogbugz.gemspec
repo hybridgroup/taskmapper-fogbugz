@@ -22,7 +22,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'taskmapper'
   gem.add_dependency 'ruby-fogbugz', '~> 0.1'
 
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '~> 2.0'
   gem.add_development_dependency "webmock", "~> 1.14.0"
-  gem.add_development_dependency 'vcr', '~> 1.11'
+  gem.add_development_dependency 'vcr', '~> 2.6.0'
 end

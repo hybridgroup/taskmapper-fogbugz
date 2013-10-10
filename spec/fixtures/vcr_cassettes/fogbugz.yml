@@ -1,40 +1,47 @@
---- 
-- !ruby/struct:VCR::HTTPInteraction 
-  request: !ruby/struct:VCR::Request 
-    method: :get
-    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=logon&password=1234567&email=rafael%40hybridgroup.com
-    body: 
-    headers: 
-      content-type: 
+---
+http_interactions:
+- request:
+    method: GET
+    uri: https://ticketrb.fogbugz.com/api.asp?cmd=logon&email=rafael@hybridgroup.com&password=1234567
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
       - text/xml
-  response: !ruby/struct:VCR::Response 
-    status: !ruby/struct:VCR::ResponseStatus 
+  response:
+    status:
       code: 200
       message: OK
-    headers: 
-      etag: 
-      - ""
-      x-aspnet-version: 
+    headers:
+      Etag:
+      - ''
+      X-Aspnet-Version:
       - 2.0.50727
-      transfer-encoding: 
+      Transfer-Encoding:
       - chunked
-      cache-control: 
+      Cache-Control:
       - private
-      content-type: 
+      Content-Type:
       - text/xml;charset=utf-8
-      x-powered-by: 
+      X-Powered-By:
       - ASP.NET
-      expires: 
+      Expires:
       - Tue, 05 Sep 2000 09:00:00 GMT
-      date: 
+      Date:
       - Wed, 21 Mar 2012 22:02:31 GMT
-      set-cookie: 
-      - sUniqueID=20120321220231-201.229.129.45-en0597j86h; expires=Tue, 22-Mar-2022 02:02:31 GMT; path=/; secure; HttpOnly
+      Set-Cookie:
+      - sUniqueID=20120321220231-201.229.129.45-en0597j86h; expires=Tue, 22-Mar-2022
+        02:02:31 GMT; path=/; secure; HttpOnly
       - ixPerson=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
       - DBID=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
       - 0xbeef=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
       - fbToken=; expires=Tue, 20-Mar-2012 22:02:31 GMT; path=/; secure; HttpOnly
-      server: 
+      Server:
       - Microsoft-IIS/6.0
-    body: <?xml version="1.0" encoding="UTF-8"?><response><token><![CDATA[26jgegikmofn27rcd6ql676fso9r22]]></token></response>
-    http_version: "1.1"
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><response><token><![CDATA[26jgegikmofn27rcd6ql676fso9r22]]></token></response>
+    http_version: '1.1'
+  recorded_at: Thu, 10 Oct 2013 19:26:18 GMT
+recorded_with: VCR 2.6.0

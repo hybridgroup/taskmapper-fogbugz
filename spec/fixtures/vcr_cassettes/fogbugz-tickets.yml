@@ -1,36 +1,46 @@
---- 
-- !ruby/struct:VCR::HTTPInteraction 
-  request: !ruby/struct:VCR::Request 
-    method: :get
-    uri: https://ticketrb.fogbugz.com:443/api.asp?cmd=search&cols=dtLastUpdated%2CixBug%2CsStatus%2CsTitle%2CsLatestTextSummary%2CixProject%2CsProject%2CsPersonAssignedTo%2CsPriority&token=26jgegikmofn27rcd6ql676fso9r22&q=project%3A%3D2
-    body: 
-    headers: 
-      content-type: 
+---
+http_interactions:
+- request:
+    method: GET
+    uri: https://ticketrb.fogbugz.com/api.asp?cmd=search&cols=dtLastUpdated,ixBug,sStatus,sTitle,sLatestTextSummary,ixProject,sProject,sPersonAssignedTo,sPriority&q=project:=2&token=26jgegikmofn27rcd6ql676fso9r22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
       - text/xml
-  response: !ruby/struct:VCR::Response 
-    status: !ruby/struct:VCR::ResponseStatus 
+  response:
+    status:
       code: 200
       message: OK
-    headers: 
-      transfer-encoding: 
+    headers:
+      Transfer-Encoding:
       - chunked
-      x-powered-by: 
+      X-Powered-By:
       - ASP.NET
-      expires: 
+      Expires:
       - Tue, 05 Sep 2000 09:00:00 GMT
-      x-aspnet-version: 
+      X-Aspnet-Version:
       - 2.0.50727
-      content-type: 
+      Content-Type:
       - text/xml;charset=utf-8
-      etag: 
-      - ""
-      server: 
+      Etag:
+      - ''
+      Server:
       - Microsoft-IIS/6.0
-      set-cookie: 
-      - sUniqueID=20120321222959-201.229.129.45-pmf49gkh0j; expires=Tue, 22-Mar-2022 02:29:59 GMT; path=/; secure; HttpOnly
-      cache-control: 
+      Set-Cookie:
+      - sUniqueID=20120321222959-201.229.129.45-pmf49gkh0j; expires=Tue, 22-Mar-2022
+        02:29:59 GMT; path=/; secure; HttpOnly
+      Cache-Control:
       - private
-      date: 
+      Date:
       - Wed, 21 Mar 2012 22:29:59 GMT
-    body: <?xml version="1.0" encoding="UTF-8"?><response><cases count="1"><case ixBug="1" operations="edit,assign,resolve,email,remind"><ixBug>1</ixBug><sStatus><![CDATA[Active]]></sStatus><sTitle><![CDATA["Welcome to FogBugz" Sample Case]]></sTitle><sLatestTextSummary></sLatestTextSummary><ixProject>2</ixProject><sProject><![CDATA[Inbox]]></sProject><sPersonAssignedTo><![CDATA[Ramon Martinez]]></sPersonAssignedTo><sPriority><![CDATA[Must Fix]]></sPriority><dtLastUpdated>2012-03-21T21:27:33Z</dtLastUpdated></case></cases></response>
-    http_version: "1.1"
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><response><cases count="1"><case
+        ixBug="1" operations="edit,assign,resolve,email,remind"><ixBug>1</ixBug><sStatus><![CDATA[Active]]></sStatus><sTitle><![CDATA["Welcome
+        to FogBugz" Sample Case]]></sTitle><sLatestTextSummary></sLatestTextSummary><ixProject>2</ixProject><sProject><![CDATA[Inbox]]></sProject><sPersonAssignedTo><![CDATA[Ramon
+        Martinez]]></sPersonAssignedTo><sPriority><![CDATA[Must Fix]]></sPriority><dtLastUpdated>2012-03-21T21:27:33Z</dtLastUpdated></case></cases></response>
+    http_version: '1.1'
+  recorded_at: Thu, 10 Oct 2013 19:26:18 GMT
+recorded_with: VCR 2.6.0
