@@ -1,4 +1,4 @@
-#require YOUR_PROVIDER_API
+require 'taskmapper'
 require 'fogbugz'
 
 %w{ fogbugz ticket project comment version }.each do |f|
