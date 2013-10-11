@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require 'spec_helper'
 
 describe TaskMapper::Provider::Fogbugz::Project do
   let(:tm) { create_instance }
