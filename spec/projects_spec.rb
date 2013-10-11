@@ -5,33 +5,51 @@ describe TaskMapper::Provider::Fogbugz::Project do
   let(:project_class) { TaskMapper::Provider::Fogbugz::Project }
   let(:project_id) { 2 }
 
-  vcr_options = { :cassette_name => "all-fogbugz-projects" }
-  it "should be able to load all projects", :vcr => vcr_options do
-    projects = tm.projects
-    projects.should be_an_instance_of(Array)
-    projects.first.should be_an_instance_of(project_class)
+  describe "#projects" do
+    vcr_options = { :cassette_name => "all-fogbugz-projects" }
+    context "with no arguments", :vcr => vcr_options do
+      let(:projects) { tm.projects }
+
+      it "returns an array of all projects" do
+        expect(projects).to be_an Array
+        expect(projects.first).to be_a project_class
+      end
+    end
+
+    vcr_options = { :cassette_name => "all-fogbugz-projects" }
+    context "with an array of project IDs", :vcr => vcr_options do
+      let(:projects) { tm.projects [project_id] }
+
+      it "should return an array of matching projects" do
+        expect(projects).to be_an Array
+        expect(projects.length).to eq 1
+        expect(projects.first).to be_a project_class
+        expect(projects.first.id).to eq project_id
+      end
+    end
+
+    vcr_options = { :cassette_name => "load-projects-attributes" }
+    context "with a hash of attributes", :vcr => vcr_options do
+      let(:projects) { tm.projects :id => project_id }
+
+      it "returns an array of matching projects" do
+        expect(projects).to be_an Array
+        expect(projects.length).to eq 1
+        expect(projects.first).to be_a project_class
+        expect(projects.first.id).to eq project_id
+      end
+    end
   end
 
-  vcr_options = { :cassette_name => "all-fogbugz-projects" }
-  it "should be able to load projects from an array of ids", :vcr => vcr_options do
-    projects = tm.projects([project_id])
-    projects.should be_an_instance_of(Array)
-    projects.first.should be_an_instance_of(project_class)
-    projects.first.id.should == project_id
-  end
+  describe "#project" do
+    vcr_options = { :cassette_name => "load-project-by-id" }
+    context "with a project ID", :vcr => vcr_options do
+      let(:project) { tm.project project_id }
 
-  vcr_options = { :cassette_name => "load-projects-attributes" }
-  it "should be able to load all projects from attributes", :vcr => vcr_options do
-    projects = tm.projects(:id => project_id)
-    projects.should be_an_instance_of(Array)
-    projects.first.should be_an_instance_of(project_class)
-    projects.first.id.should == project_id
-  end
-
-  vcr_options = { :cassette_name => "load-project-by-id" }
-  it "should be able to find a project by id", :vcr => vcr_options do
-    project = tm.project(project_id)
-    project.should be_an_instance_of(project_class)
-    project.id.should == project_id
+      it "returns the requested project" do
+        expect(project).to be_a project_class
+        expect(project.id).to eq project_id
+      end
+    end
   end
 end

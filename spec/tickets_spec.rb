@@ -6,54 +6,81 @@ describe TaskMapper::Provider::Fogbugz::Ticket do
   let(:ticket_id) { 1 }
   let(:ticket_class) { TaskMapper::Provider::Fogbugz::Ticket }
 
-  vcr_options = { :cassette_name => 'fogbugz-tickets' }
-  it "should be able to load all tickets", :vcr => vcr_options do
-    tickets = project.tickets
-    tickets.should be_an_instance_of(Array)
-    tickets.first.should be_an_instance_of(ticket_class)
+  describe "#tickets" do
+    vcr_options = { :cassette_name => 'fogbugz-tickets' }
+    context "without arguments", :vcr => vcr_options do
+      let(:tickets) { project.tickets }
+
+      it "returns an array containing all tickets" do
+        expect(tickets).to be_an Array
+        expect(tickets.first).to be_a ticket_class
+      end
+    end
+
+    vcr_options = { :cassette_name => 'fogbugz-tickets-by-ids' }
+    context "with an array of ticket IDs", :vcr => vcr_options do
+      let(:tickets) { project.tickets [ticket_id] }
+
+      it "returns an array containing matching tickets" do
+        expect(tickets).to be_an Array
+        expect(tickets.first).to be_a ticket_class
+        expect(tickets.first.id).to eq ticket_id
+      end
+    end
+
+    vcr_options = { :cassette_name => 'fogbugz-tickets-by-attributes' }
+    context "with a hash containing a project ID", :vcr => vcr_options do
+      let(:tickets) { project.tickets :id => ticket_id }
+
+      it "returns an array containing the requested ticket" do
+        expect(tickets).to be_an Array
+        expect(tickets.first).to be_a ticket_class
+        expect(tickets.first.id).to eq ticket_id
+      end
+    end
   end
 
-  vcr_options = { :cassette_name => 'fogbugz-tickets-by-ids' }
-  it "should be able to load all tickets based on an array of ids", :vcr => vcr_options do
-    tickets = project.tickets([ticket_id])
-    tickets.should be_an_instance_of(Array)
-    tickets.first.should be_an_instance_of(ticket_class)
-    tickets.first.id.should == ticket_id
+  describe "#ticket" do
+    vcr_options = { :cassette_name => 'fogbugz-single-ticket' }
+    context "with a ticket ID", :vcr => vcr_options do
+      let(:ticket) { project.ticket ticket_id }
+
+      it "returns the matching ticket" do
+        expect(ticket).to be_a ticket_class
+        expect(ticket.id).to eq ticket_id
+      end
+    end
+
+    vcr_options = { :cassette_name => "fogbugz-single-ticket" }
+    describe "#save", :vcr => vcr_options do
+      let(:ticket) { project.ticket ticket_id }
+
+      it "should update the ticket" do
+        ticket.title = "updated"
+        VCR.use_cassette('update-ticket') do
+          expect(ticket.save).to be_true
+        end
+        expect(ticket.title).to eq "updated"
+      end
+    end
   end
 
-  vcr_options = { :cassette_name => 'fogbugz-tickets-by-attributes' }
-  it "should be able to load all tickets based on attributes", :vcr => vcr_options do
-    tickets = project.tickets(:id => ticket_id)
-    tickets.should be_an_instance_of(Array)
-    tickets.first.should be_an_instance_of(ticket_class)
-    tickets.first.id.should == ticket_id
-  end
+  describe "#ticket!" do
+    vcr_options = { :cassette_name => 'create-ticket' }
+    context "with a title, assignee, and priority", :vcr => vcr_options do
+      let(:ticket) do
+        project.ticket!(
+          :title => 'Should be able to create ticket',
+          :assignee => 'taskmapper',
+          :priority => 2
+        )
+      end
 
-  vcr_options = { :cassette_name => 'fogbugz-single-ticket' }
-  it "should be able to load a single ticket", :vcr => vcr_options do
-    ticket = project.ticket(ticket_id)
-    ticket.should be_an_instance_of(ticket_class)
-    ticket.id.should == ticket_id
-  end
-
-  vcr_options = { :cassette_name => 'create-ticket' }
-  it "should be able to create a ticket", :vcr => vcr_options do
-    ticket = nil
-
-    ticket = project.ticket! :title => "Should be able to create ticket",
-      :priority => 2,
-      :assignee => 'taskmapper'
-
-    ticket.should be_an_instance_of(ticket_class)
-    ticket.id.should_not be_nil
-    ticket.project_id.should == project.id
-  end
-
-  vcr_options = { :cassette_name => "fogbugz-single-ticket" }
-  it "should be able to update a ticket", :vcr => vcr_options do
-    ticket = project.ticket ticket_id
-    ticket.title = "updated"
-    VCR.use_cassette('update-ticket') {  ticket.save.should == true }
-    ticket.title.should == "updated"
+      it "creates a new ticket" do
+        expect(ticket).to be_a ticket_class
+        expect(ticket.project_id).to eq project.id
+        expect(ticket.title).to eq "Should be able to create ticket"
+      end
+    end
   end
 end
