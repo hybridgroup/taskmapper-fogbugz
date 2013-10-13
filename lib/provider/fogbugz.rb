@@ -2,38 +2,49 @@ module TaskMapper::Provider
   # This is the Fogbugz Provider for taskmapper
   module Fogbugz
     include TaskMapper::Provider::Base
+
     class << self
-      attr_accessor :api
+      attr_accessor :api, :email, :password, :uri
+
+      def new(auth = {})
+        TaskMapper.new(:fogbugz, auth)
+      end
     end
 
-    #TICKET_API = Fogbugz::Ticket # The class to access the api's tickets
-    #PROJECT_API = Fogbugz::Project # The class to access the api's projects
-
-    # This is for cases when you want to instantiate using TaskMapper::Provider::Fogbugz.new(auth)
-    def self.new(auth = {})
-      TaskMapper.new(:fogbugz, auth)
+    def provider
+      TaskMapper::Provider::Fogbugz
     end
 
-    # Providers must define an authorize method. This is used to initialize and set authentication
-    # parameters to access the API
+    def configure(auth)
+      @fogbugz = ::Fogbugz::Interface.new(
+        :email => auth[:email],
+        :password => auth[:password],
+        :uri => auth[:uri]
+      )
+
+      provider.api = @fogbugz
+
+      @fogbugz.authenticate
+    rescue Exception => ex
+      warn "There was a problem authenticating against Fogbugz:"
+      warn ex.message
+    end
+
     def authorize(auth = {})
       @authentication ||= TaskMapper::Authenticator.new(auth)
       auth = @authentication
 
-      unless auth.email? && auth.password? && auth.uri?
-        raise TaskMapper::Exception.new 'Please provide email, password and uri'
+      unless auth.email && auth.password && auth.uri
+        message = "Please provide a Fogbugz URI, email, and password."
+        raise TaskMapper::Exception.new message
       end
 
-      begin
-        @fogbugz = ::Fogbugz::Interface.new(:email => auth.email,
-          :uri => auth.uri, :password => auth.password)
-        TaskMapper::Provider::Fogbugz.api = @fogbugz
-        @fogbugz.authenticate
-      rescue Exception => ex
-        warn "There was a problem authenticaticating #{ex.message}"
-      end
+      provider.email = auth.email
+      provider.password = auth.password
+      provider.uri = auth.uri
+
+      configure auth
     end
-    # declare needed overloaded methods here
 
     def projects(*options)
       Project.find(options)
@@ -52,8 +63,5 @@ module TaskMapper::Provider
         false
       end
     end
-
   end
 end
-
-
