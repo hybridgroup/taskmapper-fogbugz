@@ -1,27 +1,9 @@
 module TaskMapper::Provider
   module Fogbugz
-    # Project class for taskmapper-fogbugz
-    #
-    #
     class Project < TaskMapper::Provider::Base::Project
-      #API = Fogbugz::Project # The class to access the api's projects
-      # declare needed overloaded methods here
-
-      def initialize(*object)
-        if object.first
-          object = object.first
-          unless object.is_a? Hash
-            @system_data = {:client => object}
-            hash = {:id => object['ixProject'].to_i,
-              :name => object['sProject'],
-              :description => object['sProject'],
-              :created_at => nil,
-              :updated_at => nil}
-          else
-            hash = object
-          end
-          super(hash)
-        end
+      def initialize(*args)
+        args = args.first if args.is_a?(Array)
+        super args
       end
 
       def id
@@ -36,10 +18,12 @@ module TaskMapper::Provider
         sProject
       end
 
-      # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
-          copy_ticket = self.ticket!(:title => ticket.title, :description => ticket.description)
+          copy_ticket = self.ticket!(
+            :title => ticket.title,
+            :description => ticket.description
+          )
           ticket.comments.each do |comment|
             copy_ticket.comment!(:body => comment.body)
             sleep 1
@@ -60,33 +44,28 @@ module TaskMapper::Provider
       end
 
       def ticket!(attributes_hash)
-        provider_parent(self.class)::Ticket.create(attributes_hash.merge :project_id => id)
+        Ticket.create(attributes_hash.merge :project_id => id)
       end
 
-      def self.find(*options)
-        if options[0].first.is_a? Array
-          options[0].first.collect { |project_id| self.find_by_id(project_id) }
-        elsif options[0].first.is_a? Hash
-          self.find_by_attributes(options[0].first)
-        else
-          self.find_all
+      class << self
+        def find_by_attributes(attributes = {})
+          search_by_attribute(find_all, attributes)
         end
-      end
 
-      def self.find_by_attributes(attributes = {})
-        search_by_attribute(self.find_all, attributes)
-      end
-
-      def self.find_by_id(id)
-        self.find_all.select { |project| project.id == id }.first
-      end
-
-      def self.find_all
-        projects = []
-        TaskMapper::Provider::Fogbugz.api.command(:listProjects).each do |project|
-          projects << project[1]['project'].map { |xpro| self.new xpro }
+        def find_by_id(id)
+          find_by_attributes(:id => id).first
         end
-        projects.flatten
+
+        def find_all
+          api.command(:listProjects).collect do |project|
+            project[1]['project'].map { |p| self.new p }
+          end.flatten
+        end
+
+        private
+        def api
+          TaskMapper::Provider::Fogbugz.api
+        end
       end
     end
   end

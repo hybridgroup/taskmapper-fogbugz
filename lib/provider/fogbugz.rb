@@ -46,15 +46,6 @@ module TaskMapper::Provider
       configure auth
     end
 
-    def projects(*options)
-      Project.find(options)
-    end
-
-    def project(*options)
-      id = options.empty? ? 0 : options.first.to_i
-      Project.find_by_id(id)
-    end
-
     def valid?
       begin
         @fogbugz.command(:search, :q => 'case')
