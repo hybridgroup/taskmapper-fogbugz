@@ -31,10 +31,6 @@ module TaskMapper::Provider
         end
       end
 
-      def tickets(*options)
-        Ticket.find(self.id, options)
-      end
-
       def ticket(*options)
         if options.first.is_a? Fixnum
           Ticket.find_by_id(self.id, options.first)
